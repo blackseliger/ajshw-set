@@ -1,17 +1,18 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-useless-escape */
-export default class Validator {
+export default class Team {
   constructor() {
-    this.validName = null;
+    this.members = new Set();
+    this.arrayMembers = [];
   }
 
-  validateUsername(name) {
-    if (/[\w\d\-\_]$/g.test(name) && !/^[\d+-_]|[\d+-_]$/.test(name) && !/\d{4}/.test(name)) {
-      // eslint-disable-next-line no-return-assign
-      return this.validName = name;
-    }
-    throw new Error('Имя не должно начинаться и заканчиваться с цифр, -, _, не должно иметь 3 подряд цифры');
+  add(type) {
+    return this.members.add(type);
+  }
+
+  addAll(...rest) {
+    [...rest].forEach((type) => this.add(type));
+  }
+
+  toArray() {
+    this.arrayMembers = [...this.members];
   }
 }
-
-console.log(new Validator().validateUsername('gleb'));
